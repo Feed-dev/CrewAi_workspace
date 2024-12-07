@@ -45,7 +45,7 @@ The simpel_research_agent Crew composed of multiple AI agents, each with unique 
 
 ## Support
 
-For support, questions, or feedback regarding the SimpelResearchAgent Crew or crewAI.
+For support, questions, feedback regarding the SimpelResearchAgent Crew or crewAI.
 - Visit our [documentation](https://docs.crewai.com)
 - Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
 - [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
