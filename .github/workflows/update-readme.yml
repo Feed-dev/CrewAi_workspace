@@ -10,10 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -31,8 +29,8 @@ jobs:
 
       - name: Commit and push if changed
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git config --local user.name "Feed-dev"
+          git config --local user.email "federico.lubbert@gmail.com"
           git add README.md
-          git diff --quiet && git diff --staged --quiet || git commit -m "Updated"
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update README with current date"
           git push
