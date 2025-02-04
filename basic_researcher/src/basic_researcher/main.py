@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from crew import BasicResearcher
+from basic_researcher.crew import BasicResearcher
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
