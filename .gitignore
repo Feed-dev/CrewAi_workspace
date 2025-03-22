@@ -19,6 +19,7 @@ ENV/
 
 # Cursor
 .cursorrules
+.cursorignore
 
 # PyCharm
 .idea/
