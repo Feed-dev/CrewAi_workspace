@@ -17,6 +17,9 @@ venv/
 env/
 ENV/
 
+# Cursor
+.cursorrules
+
 # PyCharm
 .idea/
 *.iws
