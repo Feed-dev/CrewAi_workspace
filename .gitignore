@@ -20,6 +20,10 @@ ENV/
 # Cursor
 .cursorrules
 .cursorignore
+INSTRUCTIONS/
+**/MASTERPLAN.md
+**/ROADMAP.md
+**/TASK-TO-DO.md
 
 # PyCharm
 .idea/
