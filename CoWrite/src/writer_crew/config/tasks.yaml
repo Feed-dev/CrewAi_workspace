@@ -1,0 +1,105 @@
+research_task:
+  description: >
+    Conduct comprehensive research on the topic: {topic}.
+    Utilize available tools (like web search and file reading) to gather information on:
+    - Key concepts, definitions, and background.
+    - Recent developments, trends, and significant news (within the last 1-2 years).
+    - Different perspectives, arguments, or viewpoints surrounding the topic.
+    - If applicable, key figures, organizations, or case studies involved.
+    Synthesize these findings into a structured report.
+  expected_output: >
+    A well-organized Markdown report summarizing the research findings.
+    The report should include distinct sections for:
+    1. Introduction/Background: Briefly introduce the topic and its relevance.
+    2. Key Information: Detail core concepts, facts, and data found.
+    3. Recent Developments: Highlight significant news or trends.
+    4. Diverse Perspectives: Summarize different viewpoints or arguments discovered.
+    5. Conclusion: Briefly wrap up the key findings.
+    Ensure the report is informative and easy to understand, citing sources implicitly based on search results where possible.
+  agent: researcher
+  # Tools are assigned to the agent in crew.py, not listed here.
+
+outlining_task:
+  description: >
+    Analyze the provided research report (context) on {topic}.
+    Based on the research and the user's request for a {content_type} targeting {audience}
+    with an approximate length of {length} words, create a detailed, hierarchical outline.
+    The outline should structure the content logically, defining main sections and sub-points.
+    Ensure the outline flows well and covers the key aspects identified in the research.
+    Consider the target audience and content type when deciding on the structure and depth.
+  expected_output: >
+    A detailed, multi-level outline in Markdown format.
+    Use nested bullet points (-, *, +) or numbered lists for hierarchy.
+    Example:
+    - Section 1: Introduction
+      - Sub-point 1.1
+      - Sub-point 1.2
+    - Section 2: Key Findings
+      - Sub-point 2.1
+        * Detail 2.1.1
+      - Sub-point 2.2
+    - Section 3: Conclusion
+  agent: outliner
+  context:
+    - research_task # Pass the output of research_task to this task
+
+drafting_task:
+  description: >
+    Write the draft content for the {topic} project.
+    Follow the provided approved outline meticulously:
+    '''markdown
+    {outline_content}
+    '''
+    Incorporate relevant details and findings from the research report (context from research_task).
+    Consider the user feedback provided on the outline: '{user_feedback_on_outline}'.
+    Ensure the writing style adheres to the requested {tone} and is suitable for the {audience}.
+    Expand on the outline points to create engaging and informative paragraphs.
+    Maintain coherence and smooth transitions between sections.
+  expected_output: >
+    A complete first draft of the content in Markdown format.
+    The draft should follow the structure defined in the outline.
+    It should integrate information from the research report naturally.
+    The tone should match the user's request ({tone}).
+  agent: writer
+  context:
+    - research_task
+    # - outlining_task # Removed: Outline now passed via input {outline_content}
+
+editing_task:
+  description: >
+    Review the draft content provided (context from drafting_task) for the {topic} project.
+    Perform a thorough edit, focusing on:
+    - Clarity and Conciseness: Ensure ideas are expressed clearly and efficiently.
+    - Coherence and Flow: Check for logical connections between paragraphs and sections.
+    - Grammar and Spelling: Correct any grammatical errors, typos, or punctuation mistakes.
+    - Style and Tone: Ensure the writing consistently adheres to the requested {tone} and is appropriate for the {audience}.
+    - Engagement: Suggest improvements to make the content more engaging, if appropriate for the tone.
+    Provide specific feedback or directly revise the text.
+  expected_output: >
+    A revised version of the draft content in Markdown format.
+    The revised draft should incorporate corrections for grammar, spelling, clarity, and flow.
+    The tone ({tone}) should be consistent throughout.
+    Major structural changes should be avoided unless absolutely necessary for coherence.
+  agent: editor
+  context:
+    - drafting_task # Pass the output of drafting_task to this task
+
+fact_checking_task:
+  description: >
+    Review the edited draft (context from editing_task) and the original research report (context from research_task).
+    Identify all significant factual claims, statistics, or data points within the edited draft for the {topic}.
+    For each claim:
+    1. Cross-reference it with the information provided in the research report.
+    2. If necessary, use the web search tool to verify the claim against external sources.
+    3. Flag any claims that are inaccurate, contradict the research report, are unsubstantiated, or could not be verified.
+    Compile a report detailing the findings.
+  expected_output: >
+    A Markdown report summarizing the fact-checking process.
+    The report should clearly list:
+    - Verified Claims: Factual statements confirmed against research or external sources.
+    - Flagged Claims: Statements identified as inaccurate, unsubstantiated, or requiring further attention, along with the reason for flagging (e.g., "Contradicts research report section 3", "Could not verify via web search").
+    - If no issues are found, the report should state that all major claims appear factually sound based on the provided context and verification.
+  agent: fact_checker
+  context:
+    - editing_task
+    - research_task # Provide both edited draft and original research

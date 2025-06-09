@@ -1,0 +1,23 @@
+[project]
+name = "local_researcher"
+version = "0.1.0"
+description = "local-researcher using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.100.1,<1.0.0"
+]
+
+[project.scripts]
+local_researcher = "local_researcher.main:run"
+run_crew = "local_researcher.main:run"
+train = "local_researcher.main:train"
+replay = "local_researcher.main:replay"
+test = "local_researcher.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

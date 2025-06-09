@@ -1,0 +1,36 @@
+name: Update README
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs at midnight UTC
+  workflow_dispatch:      # Allows manual trigger
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytz
+
+      - name: Update README
+        run: |
+          python update_readme.py
+
+      - name: Commit and push if changed
+        run: |
+          git config --local user.name "Feed-dev"
+          git config --local user.email "federico.lubbert@gmail.com"
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update README with current date"
+          git push

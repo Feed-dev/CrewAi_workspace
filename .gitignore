@@ -1,0 +1,69 @@
+# Environment variables
+.env
+.env.*
+*.env
+
+# Conda environment
+# Note: The conda environment (crewai-workspace) is managed separately
+Miniconda3-*.sh
+*.sh
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.pyc
+.Python
+*.pyo
+.pytest_cache/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+*.venv
+
+# Cursor
+.cursorrules
+.cursorignore
+INSTRUCTIONS/
+**/MASTERPLAN.md
+**/ROADMAP.md
+**/TASK-TO-DO.md
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Distribution/Packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Testing
+.coverage
+.tox/
+.pytest_cache/
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Logs
+*.log
+logs/
+
+# Local development settings
+local_settings.py
+
+# Database
+*.sqlite3
+*.db
+
+# OS specific
+.DS_Store
+Thumbs.db
