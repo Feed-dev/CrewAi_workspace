@@ -21,6 +21,9 @@ from .content.text_tools import (
     TextCleanerTool,
     TextSummarizerTool,
 )
+from .analysis.wolfram_alpha_tool import (
+    WolframAlphaTool,
+)
 
 __version__ = "0.1.0"
 __author__ = "CrewAI Workspace"
@@ -44,6 +47,9 @@ __all__ = [
     "TextAnalyzerTool",
     "TextCleanerTool",
     "TextSummarizerTool",
+    
+    # Analysis tools
+    "WolframAlphaTool",
 ]
 
 # Tool registry for easy discovery
@@ -62,6 +68,9 @@ TOOL_REGISTRY = {
         "TextAnalyzerTool": TextAnalyzerTool,
         "TextCleanerTool": TextCleanerTool,
         "TextSummarizerTool": TextSummarizerTool,
+    },
+    "analysis": {
+        "WolframAlphaTool": WolframAlphaTool,
     },
 }
 
