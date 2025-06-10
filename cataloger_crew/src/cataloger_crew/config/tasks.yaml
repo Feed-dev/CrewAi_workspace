@@ -1,0 +1,130 @@
+search_task:
+  description: >
+    Perform autonomous web search for content related to: {topic}.
+    Execute {search_rounds} rounds of searching with the following strategy:
+    1. Start with the primary search terms: {search_terms}
+    2. Use different search types (web, news) to get diverse results
+    3. Analyze initial results to identify new search directions
+    4. Evolve search queries based on discovered content and emerging themes
+    5. Focus on finding high-quality, authoritative sources
+    6. Avoid duplicate sources from previous searches
+    7. Document search strategy evolution and reasoning
+    
+    For each search round:
+    - Generate 3-5 diverse search queries
+    - Perform searches across different content types
+    - Evaluate result quality and relevance
+    - Extract promising URLs and sources for analysis
+    - Identify new search directions for subsequent rounds
+  expected_output: >
+    A comprehensive search report in Markdown format containing:
+    1. Search Strategy Summary: Overview of search approach and evolution
+    2. Search Results by Round: Organized results from each search iteration
+    3. Quality Assessment: Evaluation of source quality and relevance
+    4. Discovered Sources: List of URLs with preliminary relevance scores
+    5. Emerging Themes: New topics or angles discovered during search
+    6. Next Search Directions: Recommended queries for future search rounds
+    
+    Format each discovered source as:
+    - URL: [full URL]
+    - Title: [page title if available]
+    - Source Type: [news, academic, blog, documentation, etc.]
+    - Relevance Score: [1-10 scale]
+    - Discovery Context: [which search query found this]
+  agent: search_agent
+
+analysis_task:
+  description: >
+    Analyze the discovered sources from the search task for the topic: {topic}.
+    For each source identified in the search results:
+    1. Extract and analyze the content (use web scraping if needed)
+    2. Assess content quality, depth, and relevance to {topic}
+    3. Generate appropriate metadata including:
+       - Content type and format
+       - Primary and secondary topics
+       - Target audience level
+       - Publication date and recency
+       - Author/source credibility
+    4. Create relevant tags using consistent taxonomy
+    5. Generate a concise but informative summary
+    6. Identify relationships to other cataloged content
+    7. Assign quality and relevance scores
+    8. Flag any content that doesn't meet quality standards
+    
+    Apply the user preferences from the knowledge base for:
+    - Content quality standards
+    - Tagging strategy
+    - Metadata requirements
+  expected_output: >
+    A detailed analysis report in Markdown format containing:
+    1. Analysis Summary: Overview of content analysis process and findings
+    2. Content Analysis Results: For each analyzed source:
+       - Source Information: URL, title, author, publication date
+       - Content Assessment: Quality score, relevance score, content type
+       - Metadata Extraction: All relevant metadata fields
+       - Generated Tags: Hierarchical tags following taxonomy
+       - Content Summary: 2-3 sentence summary of key points
+       - Relationships: Connections to other content or themes
+       - Quality Flags: Any issues or concerns identified
+    3. Analysis Statistics: Counts of content types, quality distributions
+    4. Recommendations: Suggestions for catalog organization
+    
+    Exclude any sources that:
+    - Don't meet minimum quality standards
+    - Are duplicates of existing catalog entries
+    - Are primarily promotional or commercial
+    - Lack sufficient content depth
+  agent: analysis_agent
+  context:
+    - search_task
+
+cataloging_task:
+  description: >
+    Create and maintain the catalog entries for {topic} based on the analyzed content.
+    Using the analysis results:
+    1. Check for existing catalog entries to prevent duplicates
+    2. Create new catalog entries with complete metadata
+    3. Organize entries within the existing catalog structure
+    4. Update catalog indexes and cross-references
+    5. Maintain data consistency and integrity
+    6. Generate catalog statistics and reports
+    7. Export catalog in multiple formats (JSON, CSV, Markdown)
+    8. Create backup of catalog data
+    
+    For each new catalog entry, include:
+    - Unique identifier
+    - Complete bibliographic information
+    - All extracted metadata
+    - Hierarchical categorization
+    - Full tag set
+    - Content summary
+    - Quality assessments
+    - Relationships to other entries
+    - Cataloging timestamp
+    
+    Maintain catalog organization following library science principles:
+    - Consistent metadata schemas
+    - Hierarchical subject classification
+    - Authority control for tags and categories
+    - Version control for catalog updates
+  expected_output: >
+    A comprehensive catalog management report in Markdown format containing:
+    1. Cataloging Summary: Overview of cataloging process and results
+    2. New Entries Added: Complete list of new catalog entries with metadata
+    3. Duplicate Prevention: Sources identified as duplicates and reasons
+    4. Catalog Organization: How new entries fit into existing structure
+    5. Quality Control: Any data quality issues addressed
+    6. Catalog Statistics: Updated counts and distribution metrics
+    7. Export Confirmation: Verification of catalog exports in all formats
+    8. Backup Status: Confirmation of catalog backup creation
+    
+    Additionally generate:
+    - Updated catalog.json file with all entries
+    - CSV export for data analysis
+    - Markdown index for human browsing
+    - Catalog statistics dashboard
+    
+    The catalog should be ready for the next autonomous search cycle.
+  agent: cataloger_agent
+  context:
+    - analysis_task

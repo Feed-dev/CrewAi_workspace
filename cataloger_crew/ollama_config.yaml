@@ -1,0 +1,45 @@
+# Ollama Model Configuration for Cataloger Crew
+# Modify these settings to use your preferred local Ollama models
+
+# Ollama server configuration
+ollama_host: "http://localhost:11434"
+ollama_timeout: 60
+
+# Model assignments for different agents
+# You can use the same model for all agents or different models based on your setup
+models:
+  # For search agent - can use lighter model for query generation
+  search_model: "llama3.1:8b"  # or "mistral:7b", "qwen2.5:7b"
+  
+  # For analysis agent - benefits from larger model for content analysis
+  analysis_model: "llama3.1:8b"  # or "llama3.1:70b", "qwen2.5:14b"
+  
+  # For cataloger agent - needs good structured output capabilities
+  cataloger_model: "llama3.1:8b"  # or "codegemma:7b", "deepseek-coder:6.7b"
+
+# Recommended model combinations based on your hardware:
+
+# Light setup (8GB+ VRAM):
+# All agents: "llama3.1:8b" or "mistral:7b"
+
+# Medium setup (16GB+ VRAM):
+# search_model: "llama3.1:8b"
+# analysis_model: "llama3.1:8b" 
+# cataloger_model: "qwen2.5:14b"
+
+# Heavy setup (24GB+ VRAM):
+# search_model: "llama3.1:8b"
+# analysis_model: "llama3.1:70b"
+# cataloger_model: "llama3.1:70b"
+
+# Model-specific parameters
+model_parameters:
+  temperature: 0.1  # Lower for more consistent outputs
+  top_p: 0.9
+  max_tokens: 2048
+  
+# Performance tuning
+performance:
+  batch_processing: true
+  concurrent_requests: 2  # Adjust based on your system
+  request_timeout: 120

@@ -1,0 +1,32 @@
+# Cataloger Crew User Preferences
+
+## Search Preferences
+- Focus on high-quality, authoritative sources
+- Prioritize recent content (last 2 years unless specified otherwise)
+- Avoid duplicate or near-duplicate content
+- Prefer content with clear authorship and publication dates
+
+## Content Types
+- Research papers and academic articles
+- Industry reports and whitepapers
+- Technical documentation and guides
+- News articles from reputable sources
+- Blog posts from recognized experts
+
+## Tagging Strategy
+- Use consistent, hierarchical tagging
+- Include technology tags, topic categories, and difficulty levels
+- Add temporal tags (year, month) for time-sensitive content
+- Use source reputation tags (academic, commercial, blog, news)
+
+## Quality Standards
+- Minimum content length: 500 words
+- Must have clear title and identifiable author/source
+- Prefer content with references or citations
+- Exclude promotional or purely commercial content
+
+## Organization Preferences
+- Organize by primary topic categories
+- Sub-categorize by technology, methodology, or application
+- Maintain separate collections for different content types
+- Use consistent naming conventions for files and directories
