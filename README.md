@@ -1,4 +1,4 @@
-# CrewAI Workspace
+Last Updated: 2025-06-11
 
 A comprehensive workspace containing multiple CrewAI-powered multi-agent AI projects demonstrating different use cases for collaborative AI workflows.
 
